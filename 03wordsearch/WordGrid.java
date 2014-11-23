@@ -53,13 +53,21 @@ public class WordGrid{
 
 	    
     public boolean addWordHorizontal(String word,int row, int col){
-	if((data[row].length - col - 1) >= word.length()){
+	int givenSpace = data[row].length - col;
+	if(givenSpace < word.length()){
 	    return false;
 	}else{
-	    return true;
+	    for(int i=0; i<word.length(); i++){
+		if(!(data[row][col+i] == ' ') && !(data[row][col+i] == word.charAt(i))){
+			return false;
+		}
+	    }
+	    for(int i=0; i<word.length(); i++){
+		data[row][i+col] = word.charAt(i);
+		return true;
+	    }
+	    return true;    
 	}
-
-    }  
-    
    
+    }
 }
