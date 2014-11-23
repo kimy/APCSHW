@@ -40,6 +40,7 @@ public class WordGrid{
 	return s;
     }
     
+
     /**Attempts to add a given word to the specified position of the WordGrid.
      *The word is added from left to right, must fit on the WordGrid, and must
      *have a corresponding letter to match any letters that it overlaps.
@@ -49,9 +50,7 @@ public class WordGrid{
      *@param col is the horizontal location of where you want the word to start.
      *@return true when the word is added successfully. When the word doesn't fit,
      *or there are overlapping letters that do not match, then false is returned.
-     */
-
-	    
+     */	    
     public boolean addWordHorizontal(String word,int row, int col){
 	int givenSpace = data[row].length - col;
 	if(givenSpace < word.length()){
@@ -68,6 +67,38 @@ public class WordGrid{
 	    }
 	    return true;    
 	}
-   
     }
+
+    /**Attempts to add a given word to the specified position of the WordGrid vertically.
+     * The word is added from top to bottom, must fit on the WordGrid, and must
+     * have a corresponding letter to match any letters that it overlaps.
+     *@param word any text to be added to the word grid
+     *@param row the vertical location of where you want the word to start
+     *@param col the horizontal location of where you want the word to start
+     *@return true when the word is added successfully; false when the word doesn't fit 
+     *or there are overlapping letters that do not match
+     */
+    public boolean addWordVertical(String word, int row, int col){
+	int givenSpace = data.length - row;
+
+
+    }
+
+    /**Attempts to add a given word to the specified position of the WordGrid diagonally. 
+     *The word is added from top left to bottom right, must fit on the WordGrid, and must 
+     *have a corresponding letter to match any letters that it overlaps.
+     *@param word any text to be added to the word grid
+     *@param row the vertical location of where you want the word to start
+     *@param col the horizontal location of where you want the word to start
+     *@return true when the word is added successfully; false when the word doesn't fit 
+     *or there are overlapping letters that do not match
+     */
+    public boolean addWordDiagonal(String word, int row, int col){
+	int horizontalSpace = data[row].length - col;
+	int verticalSpace = data.length -row;
+
+
+
+    }
+
 }
