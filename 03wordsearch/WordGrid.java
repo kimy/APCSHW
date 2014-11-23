@@ -110,8 +110,7 @@ public class WordGrid{
     public boolean addWordDiagonal(String word, int row, int col){
 	int horizontalSpace = data[row].length - col;
 	int verticalSpace = data.length -row;
-
-	
+       	
 
     }
 
