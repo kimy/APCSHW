@@ -18,8 +18,8 @@ public class WordGrid{
     public void clear(){
 	for(int i = 0; i < data.length; i++){
 	    for(int a = 0; a < data[i].length; a++){
-		data[i][a] = '-'; //for debugging
-		//data[i][a] =' ';
+		//data[i][a] = '-'; //for debugging
+		data[i][a] =' ';
 	    }
 	}	
 
@@ -62,12 +62,13 @@ public class WordGrid{
 		}
 	    }
 	    for(int i=0; i<word.length(); i++){
-		data[row][i+col] = word.charAt(i);
+		data[row][col+i] = word.charAt(i);
 		return true;
 	    }
 	    return true;    
 	}
     }
+
 
     /**Attempts to add a given word to the specified position of the WordGrid vertically.
      * The word is added from top to bottom, must fit on the WordGrid, and must
@@ -80,7 +81,20 @@ public class WordGrid{
      */
     public boolean addWordVertical(String word, int row, int col){
 	int givenSpace = data.length - row;
-
+	if(givenSpace < word.length()){
+	    return false;
+	}else{
+	    for(int i=0; i<word.length(); i++){
+		if(!(data[row+i][col] == ' ') && !(data[row+i][col] == word.charAt(i))){
+		    return false;
+		}
+	    }
+	    for(int i=0; i<word.length(); i++){
+		data[row+i][col] = word.charAt(i);
+		return true;
+	    }
+	    return true;
+	}
 
     }
 
@@ -97,7 +111,7 @@ public class WordGrid{
 	int horizontalSpace = data[row].length - col;
 	int verticalSpace = data.length -row;
 
-
+	
 
     }
 
