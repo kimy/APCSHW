@@ -110,8 +110,20 @@ public class WordGrid{
     public boolean addWordDiagonal(String word, int row, int col){
 	int horizontalSpace = data[row].length - col;
 	int verticalSpace = data.length -row;
-       	
-
+	if(horizontalSpace < word.length() && verticalSpace < word.length()){
+	    return false;
+	}else{
+	    for(int i=0; i<word.length(); i++){
+		if(!(data[row+i][col+i] == ' ') && !(data[row+i][col+i] == word.charAt(i))){
+		    return false;
+		}
+	    }
+	    for(int i=0; i<word.length(); i++){
+		data[row+i][col+i] = word.charAt(i);
+		return true;
+	    }
+	    return true;
+	}
     }
-
+      	
 }
