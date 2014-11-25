@@ -39,7 +39,52 @@ public class WordGrid{
 	}
 	return s;
     }
-    
+
+    public void addRandomly(String word, int row, int col){
+	Random r = new Random();
+	int dx = r.nextInt(3) - 1;
+	int dy = r.nextInt(3) - 1;
+	if(wordFits(word, row, col, dx, dy)){
+	    for(int i=0; i < word.length(); i++){
+		data[row][col] = word.charAt(i);
+		row += 1;
+		col += 1;
+	    }
+	}
+
+    }
+    public boolean add(String word, int row, int col, int dx, int dy){
+	if(wordFits(word, row, col, dx, dy)){
+	    for(int i=0; i<word.length(); i++){
+		data[row][col] = word.charAt(i);
+		row = row + 1; 
+		col = col + 1;
+	    }
+	    return true;
+	}else{
+	    return false;
+	}	
+    }    
+
+    private boolean wordFits(String word, int row, int col, int dx, int dy){
+	int x = col + (dx * word.length());
+	int y = row + (dy * word.length());
+	if(row < 0 || col < 0){
+	    return false;
+	}else{
+	    if(x >= data.length || y >= data[0].length()){
+		return false;
+	    }else{
+		if(x < 0 || y < 0){
+		    return false;
+		}else{
+		    return true;
+		}
+	    }
+	}
+
+    }
+
 
     /**Attempts to add a given word to the specified position of the WordGrid.
      *The word is added from left to right, must fit on the WordGrid, and must
