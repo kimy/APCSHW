@@ -1,4 +1,6 @@
 import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class WordGrid{
 
@@ -44,15 +46,28 @@ public class WordGrid{
 	Random r = new Random();
 	int dx = r.nextInt(3) - 1;
 	int dy = r.nextInt(3) - 1;
-	if(wordFits(word, row, col, dx, dy)){
+	if((dx == 0 && dy == 0) && wordFits(word, row, col, dx, dy)){
 	    for(int i=0; i < word.length(); i++){
 		data[row][col] = word.charAt(i);
 		row += 1;
 		col += 1;
 	    }
 	}
-
     }
+    
+    public void fill(){
+	Random r = new Random();
+	String s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	for(int i=0; i<data.length; i++){
+	    for(int a=0; a<data[i].length; a++){
+		if(("" + data[i][a]).equals(" ")){
+		    int x = r.nextInt(26);
+		    data[i][a] = s.charAt(x);
+		}		
+	    }
+	}
+    }
+
     public boolean add(String word, int row, int col, int dx, int dy){
 	if(wordFits(word, row, col, dx, dy)){
 	    for(int i=0; i<word.length(); i++){
@@ -72,7 +87,7 @@ public class WordGrid{
 	if(row < 0 || col < 0){
 	    return false;
 	}else{
-	    if(x >= data.length || y >= data[0].length()){
+	    if(x >= data.length || y >= data[0].length){
 		return false;
 	    }else{
 		if(x < 0 || y < 0){
