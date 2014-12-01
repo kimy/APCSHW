@@ -44,12 +44,12 @@ public class SuperArray{
 
 
     public void setArray(Object[] a){
-	Objects = a;
+	this.Objects = a;
     }
 
 
     public void setLength(int size){
-	Size = size;
+	this.Size = size;
     }
 
     public Object set(int index, Object o){

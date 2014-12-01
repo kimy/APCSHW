@@ -10,12 +10,12 @@ public class SuperArray{
 
     public SuperArray(int size){
 	Size = size;
-	Objects = new Object[size];
+	this.Objects = new Object[size];
     }
 
     public String toString() {
 	String s = "[ ";
-	for (int i = 0; i < Objects.length; ++i) {
+	for (int i = 0; i < this.Objects.length; ++i) {
 	    s += this.Objects[i] + ", ";
 	}
 	s += "]";
@@ -24,7 +24,7 @@ public class SuperArray{
 
 
     public int size(){
-	return Size;
+	return this.Size;
     }
 
 
@@ -44,12 +44,12 @@ public class SuperArray{
 
 
     public void setArray(Object[] a){
-	Objects = a;
+	this.Objects = a;
     }
 
 
     public void setLength(int size){
-	Size = size;
+	this.Size = size;
     }
 
     public Object set(int index, Object o){
