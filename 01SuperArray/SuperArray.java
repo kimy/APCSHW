@@ -16,7 +16,7 @@ public class SuperArray{
     public String toString() {
 	String s = "[ ";
 	for (int i = 0; i < Objects.length; ++i) {
-	    s += this.Objects[i] + ", ";
+	    s += Objects[i] + ", ";
 	}
 	s += "]";
 	return s;
@@ -94,7 +94,7 @@ public class SuperArray{
 
     public Object remove(int index){
 	if( index < 0  || index >= size() ){
-	    throw new IndexOutofBoundsExcpetion();
+	    throw new IndexOutofBoundsException();
 	}else{
 	    Object a = Objects[index];
 	    for(int i = 0; i < Size  - 1; i ++){
@@ -105,10 +105,4 @@ public class SuperArray{
 	    resize(Size);
 	    return a;
 	}
-
-    }
-
-
-   
-
 }
