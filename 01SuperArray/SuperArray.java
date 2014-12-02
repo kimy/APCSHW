@@ -1,6 +1,6 @@
 public class SuperArray{
 
-    private Object[] Objects;
+    private String[] superArray;
     private int Size;
 
     public SuperArray(){
@@ -10,13 +10,13 @@ public class SuperArray{
 
     public SuperArray(int size){
 	Size = size;
-	Objects = new Object[size];
+	superArray = new String[size];
     }
 
     public String toString() {
 	String s = "[ ";
-	for (int i = 0; i < Objects.length; ++i) {
-	    s += Objects[i] + ", ";
+	for (int i = 0; i < superArray.length; ++i) {
+	    s += superArray[i] + ", ";
 	}
 	s += "]";
 	return s;
@@ -29,12 +29,12 @@ public class SuperArray{
 
 
     public void resize(int newSize){
-	Object[] a = new Object[newSize];
+	String[] a = new String[newSize];
 	for (int i=0;i<Size;i++){
 	    a[i] = Objects[i];
 	}
 
-	Object[]sArray =new Object[newSize];
+	String[]sArray =new String[newSize];
 	for (int i=0;i<Size;i++){
 	    sArray[i]=a[i];
 	}
@@ -43,8 +43,8 @@ public class SuperArray{
     }
 
 
-    public void setArray(Object[] a){
-	Objects = a;
+    public void setArray(String[] a){
+	superArray = a;
     }
 
 
@@ -52,10 +52,10 @@ public class SuperArray{
 	Size = size;
     }
 
-    public Object set(int index, Object o){
+    public String set(int index, Object o){
 	if(index < this.size()){
-	    Object a = Objects[index];
-	    Objects[index] = o;
+	    String a = superArray[index];
+	    superArray[index] = o;
 	    return a;
 	}else{
 	    throw new IndexOutOfBoundsException();
@@ -63,48 +63,59 @@ public class SuperArray{
 
     }
 
-    public Object get(int index){
+    public String get(int index){
 	if (index < Size && index >= 0){
-	    return Objects[index];
+	    return superArray[index];
 	}else{
 	    throw new IndexOutOfBoundsException();
 	}
 
     }
 
-    public void add(Object e){
+    public void add(String e){
 	setLength(Size + 1);
 	resize(Size);
-	Objects[Size - 1] = e;
+	superArray[Size - 1] = e;
     }
 
 
-    public void add(int index, Object e){
+    public void add(int index, String e){
 	if (index>=size()){
 	    add(e);
 	    resize(Size*2);
 	}else{
 	    resize(Size*2);    
 	    for (int i=index;i<=Size-index;i++){
-		Objects[i+1]=Objects[i];
+		superArray[i+1]= superArray[i];
 	    }
-	    Objects[index] = e;
+	    superArray[index] = e;
 	}
     }
 
-    public Object remove(int index){
+    public String remove(int index){
 	if(!( index < 0  || index >= size()) ){
-	    Object a = Objects[index];
+	    String a = superArray[index];
 	    for(int i =0; i < Size - 1; i++){
-		Objects[i] = Objects[i + 1];
+		superArray[i] = superArray[i + 1];
 	    }
-	    Objects[Size - 1] = null;
-	    Size = this.Size - 1;
+	    superArray[Size - 1] = null;
+	    Size = Size - 1;
 	    resize(Size);
 	    return a;	 
 	}else{
 	    return null;
 	}
+    }
+
+    public void insertionSort(){
+
+
+    }
+
+    public void shift(int startIndex, int endIndex, int direction){
+
+
+
     }
 
 }
