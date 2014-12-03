@@ -16,9 +16,10 @@ public class WordGrid{
      *@param row is the starting height of the WordGrid
      *@param col is the starting width of the WordGrid
      */
-    public WordGrid(int row, int col){
+    public WordGrid(int row, int col, long seed){
 	data = new char[row][col];
 	clear();
+	setSeed(seed);
     }
 
     /**Set all values in the WordGrid to spaces ' '*/
@@ -82,7 +83,7 @@ public class WordGrid{
     }
 
     public int getIndex(String s, ArrayList<String> words){
-	int index;
+	int index = 0;
 	for(int i = 0; i < words.size(); i++){
 	    String word = words.get(i);
 	    if(word.equals(s)){
@@ -156,6 +157,10 @@ public class WordGrid{
 
     }
 
+    public ArrayList<String> getWordsInPuzzle(){
+	return wordsInPuzzle;
+
+    }
 
     /**Attempts to add a given word to the specified position of the WordGrid.
      *The word is added from left to right, must fit on the WordGrid, and must

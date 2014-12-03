@@ -16,9 +16,10 @@ public class WordGrid{
      *@param row is the starting height of the WordGrid
      *@param col is the starting width of the WordGrid
      */
-    public WordGrid(int row, int col){
+    public WordGrid(int row, int col, long seed){
 	data = new char[row][col];
 	clear();
+	setSeed(seed);
     }
 
     /**Set all values in the WordGrid to spaces ' '*/
@@ -47,7 +48,7 @@ public class WordGrid{
 	return s;
     }
 
-    public void loadWordsFromFile(String fileName, boolean fileRandomLetter)throws FileNotFoundException{
+    public void loadWordsFromFile(String fileName, boolean answers)throws FileNotFoundException{
 	Scanner in = new Scanner(new File(fileName));
 	while(in.hasNext()){
 	    wordlist.add(in.nextLine());
@@ -55,7 +56,9 @@ public class WordGrid{
 	in.close();
 	clear();
 	addWordsToGrid(wordlist);
+	if(answers){
 	fill();
+	}
 	setSeed(seed);
 	
     }
@@ -156,6 +159,10 @@ public class WordGrid{
 
     }
 
+    public ArrayList<String> getWordsInPuzzle(){
+	return wordsInPuzzle;
+
+    }
 
     /**Attempts to add a given word to the specified position of the WordGrid.
      *The word is added from left to right, must fit on the WordGrid, and must

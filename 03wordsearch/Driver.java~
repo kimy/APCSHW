@@ -1,20 +1,48 @@
+import java.util.*;
+import java.io.*;
+
 public class Driver{
 
-    public static void main(String [] args){
-	WordGrid  a = new WordGrid(7, 7);
-	System.out.print(a.toString());
-	//testing horizontal
-	System.out.println(a.addWordHorizontal("YUBIN", 3, 4));
-	System.out.println("should be false");
-	System.out.println(a.addWordHorizontal("YURA", 3, 2));
-	System.out.println("should be true");
-	//testing vertical
-	System.out.println(a.addWordVertical("COMPUTER", 1, 3));
-	System.out.println("Should be false");
-	System.out.println(a.addWordVertical("MARK", 1 , 4));
-	System.out.println("should be true");
-       
+    public static void main(String[] args)throws FileNotFoundException{
+
+	Random r = new Random();
+
+	/*set params 
+	 */
+	int rows = 0;
+	int cols = 0;
+	long seed = 0;
+	int answer = 0;
+	boolean answers = true;
+	
+	rows = Integer.valueOf(args[0]);
+	cols = Integer.valueOf(args[1]);
+	if(args.length > 2){
+	    seed = Long.valueOf(args[2]);
+	}else{
+	    seed = r.nextLong(8000);
+	}
+	if(args.length > 3){
+	    answer = Integer.valueOf(args[3]);
+	    if(answer == 0){
+		answers = false;
+	    }else{
+		answers = true;
+	    }
+	}else{
+	    answers = true;
+	}
+	
+	WordGrid grid = new WordGrid(rows, cols, seed);
+	if(answers){
+	    System.out.println("YOU WANTED THE ANSWERS");
+	}
+	grid.loadWordsFromFile("word.txt", answers);
+	grid.toString();
+	ArrayList<String> wordbox = grid.getWordsInPuzzle();
+	System.out.println("Get These Words");
+	wordbox.toArray();
+
     }
-
-
+   
 }
