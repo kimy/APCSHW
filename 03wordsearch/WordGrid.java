@@ -59,43 +59,56 @@ public class WordGrid{
 	    wordlist.add(in.nextLine());
 	}
 	in.close();
-	
-	addWordsToGrid(wordlist);
+	System.out.println(wordlist);
+	addWordRandom(wordlist);
 
 	if(!answers){
-	     fill();
+	    fill();
 	}
 
 	setSeed(seed);
 	
     }
+    //Peter and Brandon Helped :D!! // 
+    public void addWordRandom(ArrayList<String> words){
+	Random rand = new Random();
+	for (int i = 0; i < words.size(); i++){
+	    for (int j = 0; j < 50; j++){
+		if (add(words.get(i), rand.nextInt(data.length), rand.nextInt(data[0].length),
+			    rand.nextInt(3) - 1, rand.nextInt(3) - 1)){
+		    wordsInPuzzle.add(words.get(i));
+		    break;
+		}
+	    }
+	}   
+    }
 
 
     public void addWordsToGrid(ArrayList<String> words){
+	Random r = new Random();
 	int tries = 100;
-	wordlist = words;
 	//	wordsInPuzzle.clear();
 	clear();
 	String word;
 	int yRand = r.nextInt(data.length);
 	int xRand = r.nextInt(data[0].length);
-	int directionRand = r.nextInt(3) - 1;
-	Random r = new Random();
-
-	while(wordlist.size() > 0){
-	    int rand = r.nextInt(wordlist.size());
+	int dyRand = r.nextInt(3) - 1;
+	int dxRand = r.nextInt(3) - 1;
+      
+	while(words.size() > 0){
+	    int rand = r.nextInt(words.size());
 
 	    //word = findBiggestWord(wordlist);
 	    //int index = wordlist.indexOf(word);
-	    word = wordlist.remove(rand);
+	    word = words.remove(rand);
 	    //System.out.println(word);
 	    while(tries > 0){
-	    if(add(word, yRand, xRand, directionRand, directionRand)){
-		wordsInPuzzle.add(word);
-		System.out.println(word);
-		break;
-	    }
-	    tries--;
+		if(add(word, yRand, xRand, dyRand, dxRand)){
+		    wordsInPuzzle.add(word);
+		    //System.out.println(word);
+		    break;
+		}
+		tries--;
 	    }
 	    tries = 100;
 	}
@@ -111,7 +124,7 @@ public class WordGrid{
 		break;
 	    }
 	}
-	    return index;
+	return index;
     }
 
     public String findBiggestWord(ArrayList<String> words){
@@ -123,7 +136,7 @@ public class WordGrid{
 	    }
 	}
 	return biggest;
-   }
+    }
 
     public void setSeed(long seed){
 	r = new Random(seed);
@@ -146,52 +159,66 @@ public class WordGrid{
     }
 
     public boolean add(String word, int row, int col, int dx, int dy){
-	if(wordFits(word, row, col, dx, dy)){
+	if(checkWord(word, row, col, dx, dy)){
 	    for(int i=0; i<word.length(); i++){
 		//	System.out.println(word.length());
 		data[row + (i*dy)][col + (i*dx)] = word.charAt(i);
-		System.out.println("" + word.charAt(i));
+		//System.out.println("" + word.charAt(i));
 	    }
 	    return true;
-	}else{
-	    return false;
-	}	
+	}
+	return false;	
     }    
 
-
-    private boolean wordFits(String word, int row, int col, int dx, int dy){
-        int x = col + (dx * word.length());
-	int y = row - (dy * word.length());
-	int xSpace = col - x;
-	int ySpace = row - y;
-
-	if(dx == 0 && dy == 0){
+    private boolean checkWord(String word, int row, int col, int dx, int dy){
+	if (dx > 1 || dx < -1 || dy > 1 || dy < 1 || (dx == 0 && dy == 0) ||
+	    ((dx == 1 || dx == -1) && word.length() > data[0].length)||
+	    ((dy == 1 || dy == -1) && word.length() > data.length)){
 	    return false;
 	}
-
-	if(row < 0 || col < 0){
-	    return false;
-	}else{
-	    if(x < word.length() || y < word.length()){
+	for (int i = 0; i < word.length() ; i++){
+	    if ((row + i*dy < 0 || row + i*dy >= data.length || col + i*dx < 0 || col + i*dx >= data[0].length)
+		|| (data[row+i*dy][col+i*dx] != ' ' && word.charAt(i) != data[row+i*dy][col+i*dx])){
 		return false;
-	    }else{
-		if(xSpace < 0 || ySpace < 0){
-		    return false;
-		}else{
-		    for(int i = 0; i < word.length(); i++){
-			char checkChar = data[row + i*dy][col + i*dx];
-			if(!(word.charAt(i) == checkChar) && !(checkChar == ' ')){
-			    return false;
-			}else{
-			    return true;
-			}
-		    }
-		}
 	    }
 	}
 	return true;
     }
 
+    /*
+      private boolean wordFits(String word, int row, int col, int dx, int dy){
+      int x = col + (dx * word.length());
+      int y = row + (dy * word.length());
+      int xSpace = col - Math.abs(x);
+      int ySpace = row - Math.abs(y);
+
+      if(dx == 0 && dy == 0){
+      return false;
+      }
+
+      if(row < 0 || col < 0){
+      return false;
+      }else{
+      if(x < word.length() || y < word.length()){
+      return false;
+      }else{
+      if(xSpace < 0 || ySpace < 0){
+      return false;
+      }else{
+      for(int i = 0; i < word.length(); i++){
+      char checkChar = data[row + i*dy][col + i*dx];
+      if(!(word.charAt(i) == checkChar) && !(checkChar == ' ')){
+      return false;
+      }else{
+      return true;
+      }
+      }
+      }
+      }
+      }
+      return true;
+      }
+    */
 
     public ArrayList<String> getWordsInPuzzle(){
 	return wordsInPuzzle;
@@ -215,7 +242,7 @@ public class WordGrid{
 	}else{
 	    for(int i=0; i<word.length(); i++){
 		if(!(data[row][col+i] == ' ') && !(data[row][col+i] == word.charAt(i))){
-			return false;
+		    return false;
 		}
 	    }
 	    for(int i=0; i<word.length(); i++){
