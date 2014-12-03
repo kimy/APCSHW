@@ -63,7 +63,7 @@ public class WordGrid{
 	addWordsToGrid(wordlist);
 
 	if(!answers){
-	    // fill();
+	     fill();
 	}
 
 	setSeed(seed);
@@ -149,8 +149,8 @@ public class WordGrid{
 	if(wordFits(word, row, col, dx, dy)){
 	    for(int i=0; i<word.length(); i++){
 		//	System.out.println(word.length());
-		data[row - (i*dy)][col + (i*dx)] = word.charAt(i);
-		
+		data[row + (i*dy)][col + (i*dx)] = word.charAt(i);
+		System.out.println("" + word.charAt(i));
 	    }
 	    return true;
 	}else{
@@ -160,35 +160,38 @@ public class WordGrid{
 
 
     private boolean wordFits(String word, int row, int col, int dx, int dy){
+        int x = col + (dx * word.length());
+	int y = row - (dy * word.length());
+	int xSpace = col - x;
+	int ySpace = row - y;
+
 	if(dx == 0 && dy == 0){
-	    dx = 1;
-	    dy = 1;
+	    return false;
 	}
-	int x = col + (dx * word.length());
-	int y = row + (dy * word.length());
-	
+
 	if(row < 0 || col < 0){
 	    return false;
 	}else{
-	    if(x >= data.length || y >= data[0].length){
+	    if(x < word.length() || y < word.length()){
 		return false;
 	    }else{
-		if(x < 0 || y < 0){
+		if(xSpace < 0 || ySpace < 0){
 		    return false;
 		}else{
-		    for (int i=0;i<word.length();i++){
-			if ((!(word.charAt(i)+"").equals(data[row-i*dy][col+i*dx]))&&
-			    (!(data[row-i*dy][col+i*dx]+"").equals(" "))){
+		    for(int i = 0; i < word.length(); i++){
+			char checkChar = data[row + i*dy][col + i*dx];
+			if(!(word.charAt(i) == checkChar) && !(checkChar == ' ')){
 			    return false;
+			}else{
+			    return true;
 			}
 		    }
-		    
-		    return true;
 		}
 	    }
 	}
-
+	return true;
     }
+
 
     public ArrayList<String> getWordsInPuzzle(){
 	return wordsInPuzzle;
