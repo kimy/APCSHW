@@ -5,10 +5,6 @@ import java.io.FileNotFoundException;
 public class WordGrid{
 
     private char[][] data;
-    private ArrayList<String> words;
-    private ArrayList<String> wordsAdded;
-    private long seed;
-    private Random r;
 
     /**Initialize the grid to the size specified and fill all of the positions
      *with spaces.
@@ -46,18 +42,6 @@ public class WordGrid{
 	return s;
     }
 
-    public void loadWordsFromFile(String fileName, boolean fileRandomLetter){
-
-
-
-
-
-    }
-
-    public void setSeed(long seed){
-	r = new Random(seed);
-
-    }
     public void addRandomly(String word, int row, int col){
 	Random r = new Random();
 	int dx = r.nextInt(3) - 1;
