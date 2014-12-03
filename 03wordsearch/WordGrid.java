@@ -1,3 +1,4 @@
+
 import java.util.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -5,8 +6,8 @@ import java.io.FileNotFoundException;
 public class WordGrid{
 
     private char[][] data;
-    private ArrayList<String> words;
-    private ArrayList<String> wordsAdded;
+    private ArrayList<String> wordlist;
+    private ArrayList<String> wordsInPuzzle;
     private long seed;
     private Random r;
 
@@ -46,31 +47,70 @@ public class WordGrid{
 	return s;
     }
 
-    public void loadWordsFromFile(String fileName, boolean fileRandomLetter){
+    public void loadWordsFromFile(String fileName, boolean fileRandomLetter)throws FileNotFoundException{
+	Scanner in = new Scanner(new File(fileName));
+	while(in.hasNext()){
+	    wordlist.add(in.nextLine());
+	}
+	in.close();
+	clear();
+	addWordsToGrid(wordlist);
+	fill();
+	setSeed(seed);
+	
+    }
 
 
+    public void addWordsToGrid(ArrayList<String> words){
+	int tries = 200;
+	wordlist = words;
+	wordsInPuzzle.clear();
+	clear();
+	String word;
+	int yRand = r.nextInt(data.length);
+	int xRand = r.nextInt(data[0].length);
+	int directionRand = r.nextInt(3) - 1;
 
+	for(int i =0; i < wordlist.size(); i--){
+	    word = findBiggestWord(words);
+	    int index = getIndex(word, words);
+	    words.remove(index);
+	    if(add(word, yRand, xRand, directionRand, directionRand)){
+		wordsInPuzzle.add(word);	    }
+	    
+	}
+    }
 
+    public int getIndex(String s, ArrayList<String> words){
+	int index = 0;
+	for(int i = 0; i < words.size(); i++){
+	    String word = words.get(i);
+	    if(word.equals(s)){
+		index = i;
+		break;
+	    }else{
+		index = 0;
+	    }
+	}
+	    return index;
+    }
 
+    public String findBiggestWord(ArrayList<String> words){
+	String biggest = words.get(0);
+	for(int i = 1; i < words.size(); i++){
+	    String word = words.get(i);
+	    if(word.length() >= biggest.length()){
+		biggest = word;
+	    }
+	}
+	return biggest;
     }
 
     public void setSeed(long seed){
 	r = new Random(seed);
 
     }
-    public void addRandomly(String word, int row, int col){
-	Random r = new Random();
-	int dx = r.nextInt(3) - 1;
-	int dy = r.nextInt(3) - 1;
-	if((dx == 0 && dy == 0) && wordFits(word, row, col, dx, dy)){
-	    for(int i=0; i < word.length(); i++){
-		data[row][col] = word.charAt(i);
-		row += 1;
-		col += 1;
-	    }
-	}
-    }
-    
+
     public void fill(){
 	Random r = new Random();
 	String s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
