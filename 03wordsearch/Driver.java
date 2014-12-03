@@ -36,10 +36,10 @@ public class Driver{
 	    System.out.println("YOU WANTED THE ANSWERS");
 	}
 	grid.loadWordsFromFile("word.txt", answers);
-	grid.toString();
+	System.out.println(grid.toString());
 	ArrayList<String> wordbox = grid.getWordsInPuzzle();
 	System.out.println("Get These Words");
-	wordbox.toArray();
+	System.out.println(wordbox);
 
     }
    

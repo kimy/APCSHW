@@ -52,24 +52,27 @@ public class WordGrid{
     }
 
     public void loadWordsFromFile(String fileName, boolean answers)throws FileNotFoundException{
+       
 	Scanner in = new Scanner(new File(fileName));
 	wordlist.clear();
 	while(in.hasNext()){
 	    wordlist.add(in.nextLine());
 	}
 	in.close();
-	clear();
+	
 	addWordsToGrid(wordlist);
-	if(answers){
+
+	if(!answers){
 	fill();
 	}
+
 	setSeed(seed);
 	
     }
 
 
     public void addWordsToGrid(ArrayList<String> words){
-	int tries = 200;
+	int tries = 100;
 	wordlist = words;
 	wordsInPuzzle.clear();
 	clear();
@@ -77,11 +80,14 @@ public class WordGrid{
 	int yRand = r.nextInt(data.length);
 	int xRand = r.nextInt(data[0].length);
 	int directionRand = r.nextInt(3) - 1;
+	Random r = new Random();
 
-	for(int i =0; i < wordlist.size(); i--){
-	    word = findBiggestWord(words);
-	    int index = words.getIndexOf(word);
-	    words.remove(index);
+	while(wordlist.size() > 0){
+	    int rand = r.nextInt(wordlist.size());
+
+	    //word = findBiggestWord(wordlist);
+	    //int index = wordlist.indexOf(word);
+	    word = wordlist.remove(rand);
 	    if(add(word, yRand, xRand, directionRand, directionRand)){
 		wordsInPuzzle.add(word);
 	    }
@@ -91,7 +97,8 @@ public class WordGrid{
 
     public int getIndex(String s, ArrayList<String> words){
 	int index = 0;
-	for(int i = 0; i < words.size(); i++){
+	wordlist = words;
+	for(int i = 0; i < wordlist.size(); i++){
 	    String word = words.get(i);
 	    if(word.equals(s)){
 		index = i;
