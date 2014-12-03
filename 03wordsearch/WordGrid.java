@@ -1,4 +1,5 @@
 
+
 import java.util.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,6 +20,8 @@ public class WordGrid{
     public WordGrid(int row, int col, long seed){
 	data = new char[row][col];
 	clear();
+	wordlist = new ArrayList<String>();
+	wordsInPuzzle = new ArrayList<String>();
 	setSeed(seed);
     }
 
@@ -50,6 +53,7 @@ public class WordGrid{
 
     public void loadWordsFromFile(String fileName, boolean answers)throws FileNotFoundException{
 	Scanner in = new Scanner(new File(fileName));
+	wordlist.clear();
 	while(in.hasNext()){
 	    wordlist.add(in.nextLine());
 	}
@@ -76,10 +80,11 @@ public class WordGrid{
 
 	for(int i =0; i < wordlist.size(); i--){
 	    word = findBiggestWord(words);
-	    int index = getIndex(word, words);
+	    int index = words.indexOf(word);
 	    words.remove(index);
 	    if(add(word, yRand, xRand, directionRand, directionRand)){
-		wordsInPuzzle.add(word);	    }
+		wordsInPuzzle.add(word);
+	    }
 	    
 	}
     }
@@ -91,8 +96,6 @@ public class WordGrid{
 	    if(word.equals(s)){
 		index = i;
 		break;
-	    }else{
-		index = 0;
 	    }
 	}
 	    return index;
@@ -102,7 +105,7 @@ public class WordGrid{
 	String biggest = words.get(0);
 	for(int i = 1; i < words.size(); i++){
 	    String word = words.get(i);
-	    if(word.length() >= biggest.length()){
+	    if(word.length() > biggest.length()){
 		biggest = word;
 	    }
 	}
