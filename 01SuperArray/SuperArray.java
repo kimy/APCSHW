@@ -61,7 +61,7 @@ public class SuperArray{
 	}
     }
 
-    public String get(int index){
+    public Object get(int index){
 	if(outOfRange(index)){
 	    throw new IndexOutOfBoundsException();
 	}else{
