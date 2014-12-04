@@ -1,7 +1,10 @@
-public class OrderedSuperArray extends SupperArray{
+public class OrderedSuperArray extends SuperArray{
 
     public void add(String s){
-	if(size()
+	for(int i = 0; i < Size - 1; i++){
+	    if((s.compareToIgnoreCase(superArray[i]) > 0) && (
+
+	}
 
     }
 

@@ -1,15 +1,16 @@
 public class SuperArray{
 
-    private Object[] superArray;
+    private String[] superArray;
     private int Size;
 
     public SuperArray(){
 	this(10);
+
     }
 
     public SuperArray(int size){
 	Size = size;
-	superArray = new Object[size];
+	superArray = new String[size];
     }
 
     public String toString() {
@@ -28,21 +29,21 @@ public class SuperArray{
 
 
     public void resize(int newSize){
-	Object[] temporary = new Object[newSize];
+	String[] a = new String[newSize];
 	for (int i=0;i<Size;i++){
-	    temporary[i] = superArray[i];
+	    a[i] = Objects[i];
 	}
 
-	Object[]sArray =new Object[newSize];
+	String[]sArray =new String[newSize];
 	for (int i=0;i<Size;i++){
-	    sArray[i]=temporary[i];
+	    sArray[i]=a[i];
 	}
 	setArray(sArray);
 	setLength(newSize);
     }
 
 
-    public void setArray(Object[] a){
+    public void setArray(String[] a){
 	superArray = a;
     }
 
@@ -51,32 +52,34 @@ public class SuperArray{
 	Size = size;
     }
 
-    public Object set(int index, Object o){
-	if(outOfRange(index)){
-	    throw new IndexOutOfBoundsException;
-	}else{
-	    Object a = superArray[index];
+    public String set(int index, Object o){
+	if(index < this.size()){
+	    String a = superArray[index];
 	    superArray[index] = o;
 	    return a;
+	}else{
+	    throw new IndexOutOfBoundsException();
 	}
+
     }
 
     public String get(int index){
-	if(outOfRange(index)){
-	    throw new IndexOutOfBoundsException();
-	}else{
+	if (index < Size && index >= 0){
 	    return superArray[index];
+	}else{
+	    throw new IndexOutOfBoundsException();
 	}
+
     }
 
-    public void add(Object e){
+    public void add(String e){
 	setLength(Size + 1);
 	resize(Size);
 	superArray[Size - 1] = e;
     }
 
 
-    public void add(int index, Object e){
+    public void add(int index, String e){
 	if (index>=size()){
 	    add(e);
 	    resize(Size*2);
@@ -89,9 +92,9 @@ public class SuperArray{
 	}
     }
 
-    public Object remove(int index){
+    public String remove(int index){
 	if(!( index < 0  || index >= size()) ){
-	    Object a = superArray[index];
+	    String a = superArray[index];
 	    for(int i =0; i < Size - 1; i++){
 		superArray[i] = superArray[i + 1];
 	    }
@@ -101,14 +104,6 @@ public class SuperArray{
 	    return a;	 
 	}else{
 	    return null;
-	}
-    }
-
-    private boolean outOfRange(int index){
-	if(index < 0 || index >= size()){
-	    return true;
-	}else{
-	    return false;
 	}
     }
 
