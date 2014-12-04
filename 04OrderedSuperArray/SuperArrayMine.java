@@ -111,5 +111,22 @@ public class SuperArrayMine{
             return false;
         }
     }
+    public void insertionSort(){
+	String s;
+	s = "";
+
+	for (int i = 0; i < size() - 1; i++){
+	    if (superArray[i+1].compareTo(superArray[i])<0){
+		s = superArray[i+1];
+		int a = i;
+		
+		for (int a = i; (a >= 0) && (s.compareTo(superArray[a]) < 0); a--){
+		    superArray[a +1 ] = superArray[a];
+		}
+		
+		superArray[a + 1] = s;
+	    }
+	}
+    }
     
 }
