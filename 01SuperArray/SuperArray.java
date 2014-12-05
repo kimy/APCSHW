@@ -33,7 +33,7 @@ public class SuperArray{
 	    temporary[i] = superArray[i];
 	}
 
-	Object[]sArray =new Object[newSize];
+	Object[]sArray = new Object[newSize];
 	for (int i=0;i<Size;i++){
 	    sArray[i]=temporary[i];
 	}

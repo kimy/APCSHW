@@ -1,4 +1,4 @@
-public class SuperArray{
+public class SuperArrayMrK{
     int size;
     String[] data;
 

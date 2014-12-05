@@ -8,7 +8,7 @@ public class SuperArray{
     }
     
     public SuperArray(int size){
-        Size = 0;
+        Size = size;
         superArray = new String[size];
     }
     
