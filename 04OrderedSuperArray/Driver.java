@@ -19,15 +19,17 @@ public class Driver{
 	long start = System.currentTimeMillis();
 	L.insertionSort();
 	long end = System.currentTimeMillis();
+
 	System.out.println("insertionSort(): " + (end - start));
-	System.out.println(L);
+
+	//System.out.println(L);
 
 	//test selectionSort();
 	start = System.currentTimeMillis();
 	M.selectionSort();
 	end = System.currentTimeMillis();
 	System.out.println("selectionSort(): " + (end - start));
-	System.out.println(M);
+	//System.out.println(M);
 
     }
 
