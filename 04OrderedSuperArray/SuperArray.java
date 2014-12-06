@@ -8,7 +8,7 @@ public class SuperArray{
     }
     
     public SuperArray(int size){
-        Size = size;
+        Size = 0;
         superArray = new String[size];
     }
     
@@ -26,19 +26,12 @@ public class SuperArray{
         return Size;
     }
     
-    
-    public void resize(int newSize){
-        String[] temporary = new String[newSize];
-        for (int i=0;i<Size;i++){
-            temporary[i] = superArray[i];
-        }
-        
-        String[]sArray =new String[newSize];
-        for (int i=0;i<Size;i++){
-            sArray[i]=temporary[i];
-        }
-        setArray(sArray);
-        setLength(newSize);
+    public void resize(int newCapacity){
+	String[]a = new String[newCapacity];
+	for (int i = 0;i < superArray.length; i++){
+	    a[i] = superArray[i];
+	}
+	superArray = a;
     }
     
     
@@ -53,7 +46,7 @@ public class SuperArray{
     
     public String set(int index, String o){
         if(outOfRange(index)){
-            throw new IndexOutOfBoundsException;
+            throw new IndexOutOfBoundsException();
         }else{
             String a = superArray[index];
             superArray[index] = o;
@@ -68,13 +61,21 @@ public class SuperArray{
             return superArray[index];
         }
     }
-    
-    public void add(String e){
+    /*  
+	public void add(String e){
         setLength(Size + 1);
         resize(Size);
         superArray[Size - 1] = e;
+	}
+    */
+
+    public void add(String e){
+	if (size()*2 > superArray.length){
+	    resize(superArray.length * 2);
+	}
+	superArray[size()] = e;
+	Size += 1;
     }
-    
     
     public void add(int index, String e){
         if (index>=size()){
@@ -112,6 +113,18 @@ public class SuperArray{
         }
     }
 
+    public int find(String target){
+
+	for(int i = 0; i < size(); i++){
+	    if(get(i).equals(target)){
+		return i;
+	    }
+	}
+	return -1;
+    }
+
+
+    //Sorts 
     public void insertionSort(){
 	String s;
 	s = "";
@@ -121,7 +134,7 @@ public class SuperArray{
 		s = superArray[i+1];
 		int a = i;
 		
-		for (int a = i; (a >= 0) && (s.compareTo(superArray[a]) < 0); a--){
+		for (a = i; (a >= 0) && (s.compareTo(superArray[a]) < 0); a--){
 		    superArray[a + 1] = superArray[a];
 		}
 		
@@ -132,10 +145,32 @@ public class SuperArray{
 
     public void selectionSort(){
 
+	for (int i = 0; i < size(); i++){
+	    String minElement = get(i);
+	    int index =i;
 
-
-
+	    for (int a = i+1; a < size(); a++){
+		if (get(a).compareTo(minElement) < 0){
+		    minElement = get(a);
+		    index = a;
+		}
+	    }
+	    set(index,set(i, minElement));
+	}
 
     }
-    
+
+    //from Mr. K 
+    public void badInsertionSort(SuperArray L){
+        OrderedSuperArray c = new OrderedSuperArray();
+        while( L.size() > 0){ 
+            c.add(L.remove(0));
+        }
+        while(c.size() > 0){
+            L.add(c.remove(0));
+        }
+    }
+
+
+
 }
