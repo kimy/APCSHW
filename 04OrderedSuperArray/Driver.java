@@ -16,17 +16,17 @@ public class Driver{
 	}
 
 	//test insertionSort();
-	long startTime = System.currentTimeMillis();
+	long start = System.currentTimeMillis();
 	L.insertionSort();
-	long endTime = System.currentTimeMillis();
-	System.out.println("insertionSort(): " + (endTime - startTime));
+	long end = System.currentTimeMillis();
+	System.out.println("insertionSort(): " + (end - start));
 	System.out.println(L);
 
 	//test selectionSort();
-	startTime = System.currentTimeMillis();
+	start = System.currentTimeMillis();
 	M.selectionSort();
-	endTime = System.currentTimeMillis();
-	System.out.println("selectionSort(): " + (endTime - startTime));
+	end = System.currentTimeMillis();
+	System.out.println("selectionSort(): " + (end - start));
 	System.out.println(M);
 
     }
