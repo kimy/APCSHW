@@ -11,9 +11,13 @@ public class Window extends JFrame {
 	this.setTitle("Farenheit and Celsius");
 	this.setSize(600,400);
 	this.setLocation(100,100);
-	this.setDefaultCloseOperator(EXIT_ON_CLOSE);
+	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+	pane = this.getContentPane();
+	pane.setLayout(new GridLayout());
 
+	F = new JButton("Farenheit");
+	C = new JButton("Celcius");
     }
 
     public static void main(String[]args){
@@ -22,3 +26,5 @@ public class Window extends JFrame {
 
 
     }
+
+}
