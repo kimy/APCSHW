@@ -9,7 +9,7 @@ public class Driver{
 	SuperArray M = new SuperArray(2000);
 	//SuperArray N = new SuperArray(2000);
   
-	for(int i = 0; i < 2000; i++){
+	for(int i = 0; i < 500000; i++){
 	    L.add("" + i);
 	    M.add("" + i);
 	    //N.add("" + i);
