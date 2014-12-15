@@ -51,9 +51,15 @@ public class Window extends JFrame {
     }
 
     public void ActionPerformed(ActionEvent e){
+	String action = e.getActionCommand();
+	String input  = l.getText();
+	Double temp = Double.parsDouble(input);
+       
 
 
     }
+
+   
 
     public static void main(String[]args){
 	Window w = new Window();
