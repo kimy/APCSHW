@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
+import java.io.*;
 
 public class Window extends JFrame {
     private Container pane;
@@ -26,8 +28,11 @@ public class Window extends JFrame {
 
 	text.setLayout(new FlowLayout());
 	buttons.setLayout(new FlowLayout());
+	pane.add(text);
+	pane.add(buttons);
 
 	l = new JLabel("Temperature:", null, JLabel.CENTER);
+
 	FC = new JButton("Farenheit");
 	CF = new JButton("Celcius");
 	temp = new JTextField(30);
@@ -37,6 +42,11 @@ public class Window extends JFrame {
 
 	buttons.add(FC);
 	buttons.add(CF);
+
+	CF.setActionCommand("CtoF");
+	CF.addActionListener(hi);
+	FC.setActionCommand("FtoC");
+	FC.addActionListner(hi);
 
     }
 
