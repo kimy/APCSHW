@@ -12,7 +12,8 @@ public class Sorts{
     }
 
     public static void radix(int[] a){
-
+	int digit;
+	ArrayList<ArrayList> bucket = new ArrayList<ArrayList>[10]; 
 
     }
 
