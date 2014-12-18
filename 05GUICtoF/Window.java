@@ -28,8 +28,8 @@ public class Window extends JFrame{
 
 	text.setLayout(new FlowLayout());
 	buttons.setLayout(new FlowLayout());
-	pane.add(text);
-	pane.add(buttons);
+	//pane.add(text);
+	//pane.add(buttons);
 
 	l = new JLabel("Temperature:", null, JLabel.CENTER);
 
@@ -48,6 +48,8 @@ public class Window extends JFrame{
 	FC.setActionCommand("FtoC");
 	FC.addActionListner(this);
 
+	pane.add(text);
+	pane.add(buttons);
     }
 
     public void ActionPerformed(ActionEvent e){
