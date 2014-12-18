@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.util.*;
 import java.io.*;
 
-public class Window extends JFrame {
+public class Window extends JFrame{
     private Container pane;
     private Container buttons;
     private Container text;
@@ -44,18 +44,24 @@ public class Window extends JFrame {
 	buttons.add(CF);
 
 	CF.setActionCommand("CtoF");
-	CF.addActionListener(hi);
+	CF.addActionListener(this);
 	FC.setActionCommand("FtoC");
-	FC.addActionListner(hi);
+	FC.addActionListner(this);
 
     }
 
     public void ActionPerformed(ActionEvent e){
 	String action = e.getActionCommand();
-	String input  = l.getText();
-	Double temp = Double.parsDouble(input);
-       
-
+	String in  = l.getText();
+	Double i = Double.parsDouble(in);
+	Double t;
+	if(action.equals("FtoC")){
+		t = 1.8*i + 32;
+	}
+	if(action.equals("CtoF")){
+	    t = (i - 32) * (5.0/9.0);
+	}
+	temp.setText("" + t);
 
     }
 
