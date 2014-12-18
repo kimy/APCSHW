@@ -3,6 +3,18 @@ import java.io.*;
 
 public class Sorts{
 
+    public static String name(){
+	return "Kim,Yubin";
+    }
+
+    public static int period(){
+	return 6;
+    }
+
+    public static void radix(int[] a){
+
+
+    }
 
     public static void bubble(int[] a){
 	boolean swapped = true;
