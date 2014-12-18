@@ -19,7 +19,7 @@ public class Sorts{
 
     public static void bubble(int[] a){
 	boolean swapped = true;
-	for (int i = a.length-1; i>=0; i--){
+	for (int i = a.length-1; i >= 0; i--){
 	    if (swapped){
 		swapped = false;
 		for (int j = 0; j < i; j++){
